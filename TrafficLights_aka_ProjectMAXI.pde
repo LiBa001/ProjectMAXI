@@ -9,6 +9,9 @@ Intersection intersec;
 
 private boolean runIntersection = false;
 
+// declare arduino connection
+Arduino arduino;
+
 
 void setup() {
   size(640, 360);
@@ -40,6 +43,9 @@ void setup() {
   
   // setup the TrafficLights' states to match realistic bahaviour
   intersec.setupLights();
+  
+  // create arduino instance
+  arduino = new Arduino(intersec);
 }
 
 

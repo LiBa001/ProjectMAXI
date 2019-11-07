@@ -10,17 +10,49 @@ final Serial conn = new Serial(this, port, BAUDRATE);
 class Arduino {
   /** Represents the arduino connection. */
   
-  private Intersection intersec;
+  public static final int OFF = 0, GREEN = 1, YELLOW = 2, RED = 3, RED_YELLOW = 4;
   
-  Arduino(Intersection intersec) {
-    this.intersec = intersec;
+  private TrafficLight[] trafficLights;
+  
+  Arduino(TrafficLight[] trafficLights) {
+    this.trafficLights = trafficLights;
   }
   
-  void sendState() {
+  void sendStates() {
     /** Sends current intersection state to Arduino. */
     
-    int state = intersec.stateCounter;
-    conn.write(state);
+    String states[] = new String[4];
+    int state;
+    
+    for (int i = 0; i < 4; i++) {
+      state = this.trafficLights[i].state;
+      
+      switch (state) {
+        case TrafficLight.OFF:
+          state = OFF;
+          break;
+        case TrafficLight.GREEN:
+          state = GREEN;
+          break;
+        case TrafficLight.YELLOW:
+          state = YELLOW;
+          break;
+        case TrafficLight.RED:
+          state = RED;
+          break;
+        case TrafficLight.RED_YELLOW:
+          state = RED_YELLOW;
+          break;
+      }
+      
+      states[i] = str(state);
+    }
+    
+    String statesString = join(states, "");
+    
+    println(statesString);
+    
+    conn.write(statesString);
   }
   
 }

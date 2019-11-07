@@ -45,7 +45,8 @@ void setup() {
   intersec.setupLights();
   
   // create arduino instance
-  arduino = new Arduino(intersec);
+  TrafficLight[] trafficLights = {tl1, tl2, tl3, tl4};
+  arduino = new Arduino(trafficLights);
 }
 
 
@@ -62,6 +63,8 @@ void draw() {
   } else {
     noLoop();  // stop running draw in a loop
   }
+  
+  arduino.sendStates();
 }
 
 

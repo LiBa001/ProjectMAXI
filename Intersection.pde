@@ -9,7 +9,7 @@ class Intersection {
   private int stateCounter;
   
   static final int SHORT_DELAY = 1000, LONG_DELAY = 5000;
-  static final int numStates = 3;  // the number of states
+  static final int numStates = 4;  // the number of states
   
   Intersection(TrafficLight[] group1, TrafficLight[] group2) {
     this.group1 = group1;
@@ -36,7 +36,7 @@ class Intersection {
     }
     this.switchGroupState(this.group2, TrafficLight.GREEN);
     
-    this.stateCounter = numStates;
+    this.stateCounter = numStates -1;
   }
   
   void nextState() {
@@ -64,7 +64,7 @@ class Intersection {
     
     this.nextState();
     
-    if (this.stateCounter <= numStates) {
+    if (this.stateCounter < numStates) {
       this.stateCounter++;
       delay(SHORT_DELAY);
     } else {

@@ -59,12 +59,18 @@ void draw() {
   
   if (runIntersection) {
     loop();  // run draw in a loop
-    intersec.run();  // run intersection
   } else {
     noLoop();  // stop running draw in a loop
+    arduino.sendStates();
   }
-  
-  arduino.sendStates();
+}
+
+
+void runIntersectionLoop() {
+  while (runIntersection) {
+    intersec.run();
+    arduino.sendStates();
+  }
 }
 
 
@@ -108,6 +114,7 @@ void keyPressed() {
     case ENTER: 
       intersec.setupLights();
       runIntersection = true;
+      thread("runIntersectionLoop");  // run intersection loop
       break;
   }
   

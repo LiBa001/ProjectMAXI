@@ -16,6 +16,8 @@ class Arduino {
   
   Arduino(TrafficLight[] trafficLights) {
     this.trafficLights = trafficLights;
+    
+    println("Connected to port: " + port);
   }
   
   void sendStates() {
@@ -48,7 +50,7 @@ class Arduino {
       states[i] = str(state);
     }
     
-    String statesString = join(states, "");
+    String statesString = join(states, "") + ';';
     
     println(statesString);
     

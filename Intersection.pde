@@ -36,7 +36,7 @@ class Intersection {
     }
     this.switchGroupState(this.group2, TrafficLight.GREEN);
     
-    this.stateCounter = numStates -1;
+    this.stateCounter = numStates;
   }
   
   void nextState() {
@@ -62,8 +62,6 @@ class Intersection {
     Basically like `Intersection.nextState`, but with state specific delay.
     */
     
-    this.nextState();
-    
     if (this.stateCounter < numStates) {
       this.stateCounter++;
       delay(SHORT_DELAY);
@@ -71,5 +69,7 @@ class Intersection {
       this.stateCounter = 1;
       delay(LONG_DELAY);
     }
+    
+    this.nextState();
   }
 }
